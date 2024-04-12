@@ -35,3 +35,19 @@ comp_cols =  {
     'Acreano': 'L',
 
 }
+
+for line in range(3, 9):
+    for comp in teams_data[sheet[f'A{line}'].value]:
+        try:
+            if teams_data[sheet[f'A{line}'].value][comp] == 'Campeão':
+                sheet[f'{comp_cols[comp]}{line}'] = sheet[f'{comp_cols[comp]}{line}'].value + 1
+            elif teams_data[sheet[f'A{line}'].value][comp] == '1º [A]':
+                sheet[f'E{line}'] = sheet[f'E{line}'].value + 1
+            elif teams_data[sheet[f'A{line}'].value][comp] == '1º [B]':
+                sheet[f'J{line}'] = sheet[f'J{line}'].value + 1
+            elif teams_data[sheet[f'A{line}'].value][comp] == '1º [C]':
+                sheet[f'M{line}'] = sheet[f'M{line}'].value + 1
+        except:
+            continue
+
+file.save('Era Fm Copy.xlsx')
