@@ -5,6 +5,8 @@ teams_data = dict()
 for c in teams:
     teams_data[c] = dict()
 
+
+# region pontuação geral
 file = xl.load_workbook('Era Fm.xlsx')
 sheet = file.active = file['Retrospecto times']
 
@@ -79,3 +81,25 @@ for line in range(12, 18):
 
 file.save('Era Fm.xlsx')
 file.close()
+# endregion
+
+# region tabela temp
+file = xl.load_workbook('temporada.xlsx')
+sheet = file.active
+
+comps = [x for x in teams_data['Acre'].keys()]
+comps.remove('Ranking acreano temp.')
+
+for col in 'BCDEFG':
+
+    line = 2
+
+    for comp in comps:
+        try:
+            sheet[f'{col}{line}'] = teams_data[sheet[f'{col}1'].value][comp]
+        finally:
+            line += 1
+        
+file.save('temporada_saída.xlsx')
+file.close()
+# endregion
