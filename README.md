@@ -6,7 +6,7 @@
 * Ler a aba de retrospecto e gerar todas as imagens de rebaixamento, acesso, títulos e de resultados dos times em competição x [ ];
 * Ler a aba de retrospecto e atualizar automaticamente a aba de pontuação geral [ V ];
 * Ler a aba de retrospecto e atualizar automaticamente a tabela de retrospecto da temporada [ V ];
-* Gerador de tumbs (apenas para clássicos acreanos) [ ];
+* Gerador de tumbs (apenas para clássicos acreanos) [ V ];
 * Editor semi-automático de vídeos [ ];
 * Gerador de lista de jogos da temporada (dizendo quais tumbs precisam ser feitas manualmente e quais escudos precisam ser usados e quais precisam ser baixados [ ];
 * Programador de vídeos para o Youtube [ ];
