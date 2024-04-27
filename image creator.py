@@ -19,15 +19,23 @@ def img_club_info(layers=(), texts=('', ''), output_name='image'):
     font = ImageFont.truetype(font='ARIBLK.TTF', size=64)
     img.text((300, 480), texts[1], font=font, fill='white', anchor='mm')
 
-    image.save(f'\\output\\{output_name}.png', 'png')
+    image.save(f'output\\{output_name}.png', 'png')
 
 
-def img_6clubs_info(teams_txt = ('A', 'A', 'C', 'F', 'R', 'S'), title = 'TITLE', output_name = 'image'):
+def img_6clubs_info(t_txt = ('A', 'A', 'C', 'F', 'R', 'S'), title = 'TITLE', output_name = 'image'):
 
+    teams_txt = list()
+
+    for t in t_txt:
+        if t == 'Campeão':
+            teams_txt.append('C')
+        else:
+            teams_txt.append(t)
+    
     psd = psd_.PSDImage.open('info6teams.psd')
     image = psd.composite()
     img = ImageDraw.Draw(image)
-    font = ImageFont.truetype(font='ARIBLK.TTF', size=64)
+    font = ImageFont.truetype(font='ARIBLK.TTF', size=48)
 
     txt_key = 0
     
@@ -38,7 +46,7 @@ def img_6clubs_info(teams_txt = ('A', 'A', 'C', 'F', 'R', 'S'), title = 'TITLE',
 
     img.text((300, 300), title, font=font, fill='white', anchor='mm')
 
-    image.save(f'\\output\\{output_name}.png', 'png')
+    image.save(f'output\\{output_name}.png', 'png')
 
 
 def img_tumb(teams=('Acre', 'Silvestre'), comp='Copa', fase='8/F', desc='ida e volta', output_name='image'):
@@ -61,39 +69,51 @@ def img_tumb(teams=('Acre', 'Silvestre'), comp='Copa', fase='8/F', desc='ida e v
     font = ImageFont.truetype(font='ARIBLK.TTF', size=64)
     img.text((960, 436), desc, font=font, fill='white', anchor='mm')
 
-    image.save(f'\\output\\{output_name}.png', 'png')
+    image.save(f'output\\{output_name}.png', 'png')
 
 
 if __name__ == '__main__':
 
-    teams_data = read_temp(2023)
+    teams_data = read_temp(2022)
     teams = ('Acre', 'Amazonense', 'C.F.C', 'Floresta', 'Rural', 'Silvestre')
     comps = dict()
 
     comps_text = dict()
-    comps_text['Acreano'] = (('É CAMPEÃO', 'ACREANO!'), 'Campeonato Acreano')
+    comps_text['Acreano'] = (('É CAMPEÃO', 'ACREANO!'), 'Acreano')
     comps_text['Copa Verde'] = (('É CAMPEÃO', 'DA COPA VERDE!'), 'Copa Verde')
     comps_text['Brasileirão'] = (('É CAMPEÃO', 'DA SÉRIE'), 'Brasileirão')
     comps_text['Copa do Brasil'] = (('É CAMPEÃO', 'DA COPA DO BRASIL!'), 'Copa do Brasil')
-    comps_text['Sula.'] = (('É CAMPEÃO', 'DA SUL-AMERICANA!'), 'Copa Sul-Americana')
-    comps_text['Liberta.'] = (('É CAMPEÃO', 'DA LIBERTADORES!'), 'Copa Libertadores')
-    comps_text['Super Copa'] = (('É CAMPEÃO DA', 'SUPERCOPA DO BRASIL!') , 'SuperCopa do Brasil')
-    comps_text['Recopa Sula.'] = (('É CAMPEÃO DA', 'RECOPA SUL-AMERICANA!'), 'Recopa Sul-Americana')
+    comps_text['Sula.'] = (('É CAMPEÃO', 'DA SUL-AMERICANA!'), 'Sul-Americana')
+    comps_text['Liberta.'] = (('É CAMPEÃO', 'DA LIBERTADORES!'), 'Libertadores')
+    comps_text['Super Copa'] = (('É CAMPEÃO DA', 'SUPERCOPA DO BRASIL!') , 'SuperCopa')
+    comps_text['Recopa Sula.'] = (('É CAMPEÃO DA', 'RECOPA SUL-AMERICANA!'), 'Recopa')
 
     for comp in teams_data['Acre'].keys():
         comps[comp] = list()
         for team in teams_data.keys():
             comps[comp].append(teams_data[team][comp])
+    
+    comps.pop('Ranking acreano temp.')
 
     for comp in comps:
         winner = False
         for team in range(0, len(comps[comp])):
-            if comps[comp][team] in ('Campeão') or '1º' in comps[comp][team]:
+            if comps[comp][team] in ('Campeão') or comps[comp][team][0:2] == '1º':
                 winner = True
                 if comp == 'Brasileirão':
                     serie = f' {comps[comp][team][-2]}!'
-                    img_club_info((teams[team], 'confete', 'taça', 'acesso'), (comps_text[0][comp][0], comps_text[0][comp][1]+serie[-2]), f'{teams[team]} campeão {comp}')
+                    img_club_info((teams[team], 'confete', 'taça', 'acesso'), (comps_text[comp][0][0], comps_text[comp][0][1]+serie[-2]), f'{teams[team]} campeão {comp}')
                 else:
-                    img_club_info((teams[team], 'confete', 'taça', 'acesso'), comps_text[0][comp], f'{teams[team]} campeão {comp}')
-        if not winner:
-            img_6clubs_info(comps[comp], comps_text[comp][1].upper(), f'resultados {comp}')
+                    img_club_info((teams[team], 'confete', 'taça'), comps_text[comp][0], f'{teams[team]} campeão {comp}')
+        img_6clubs_info(comps[comp], comps_text[comp][1].upper(), f'resultados {comp}')
+
+    for team in range(0, 6):
+        if int(comps['Brasileirão'][team][:-5]) < 5 and comps['Brasileirão'][team][-2] != 'A':
+            img_club_info((teams[team], 'acesso', 'confete'), ('SUBIU DA', f'SÉRIE {comps['Brasileirão'][team][-2]}!'), f'{teams[team]} acesso')
+
+        elif int(comps['Brasileirão'][team][:-5]) > 16 and comps['Brasileirão'][team][-2] != 'C':
+            img_club_info((teams[team], 'rebaixado'), ('REBAIXADO', f'DA SÉRIE {comps['Brasileirão'][team][-2]}!'), f'{teams[team]} rebaixado')
+        
+        elif int(comps['Brasileirão'][team][:-5]) > 16 and comps['Brasileirão'][team][-2] == 'C':
+            img_club_info((teams[team], 'rebaixado'), ('VAI FICAR', 'SEM DIVISÃO!'), f'{teams[team]} sem divisão')
+   
