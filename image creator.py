@@ -116,4 +116,3 @@ if __name__ == '__main__':
         
         elif int(comps['Brasileirão'][team][:-5]) > 16 and comps['Brasileirão'][team][-2] == 'C':
             img_club_info((teams[team], 'rebaixado'), ('VAI FICAR', 'SEM DIVISÃO!'), f'{teams[team]} sem divisão')
-   
