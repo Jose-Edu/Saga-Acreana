@@ -7,9 +7,9 @@
 * Ler a aba de retrospecto e atualizar automaticamente a aba de pontuação geral [ V ];
 * Ler a aba de retrospecto e atualizar automaticamente a tabela de retrospecto da temporada [ V ];
 * Gerador de tumbs (apenas para clássicos acreanos) [ V ];
-* Editor semi-automático de vídeos [ ];
-* Programador de vídeos para o Youtube [ ];
-* Programador de posts para o Twitter [ ].
+* Editor semi-automático de vídeos [ V ];
+* Programador de vídeos para o Youtube [  ];
+* Programador de posts para o Twitter [  ].
 
 ## Com isso pronto, a simulação da Saga Acreana se resumirá a
 
