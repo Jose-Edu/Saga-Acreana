@@ -1,6 +1,7 @@
 import psd_tools as psd_
-from PIL import ImageDraw, ImageFont
+from PIL import ImageDraw, ImageFont, Image
 from read_temp import read_temp
+
 
 def img_club_info(layers=(), texts=('', ''), output_name='image'):
 
@@ -20,6 +21,7 @@ def img_club_info(layers=(), texts=('', ''), output_name='image'):
     img.text((300, 480), texts[1], font=font, fill='white', anchor='mm')
 
     image.save(f'output\\{output_name}.png', 'png')
+    image.close()
 
 
 def img_6clubs_info(t_txt = ('A', 'A', 'C', 'F', 'R', 'S'), title = 'TITLE', output_name = 'image'):
@@ -32,8 +34,7 @@ def img_6clubs_info(t_txt = ('A', 'A', 'C', 'F', 'R', 'S'), title = 'TITLE', out
         else:
             teams_txt.append(t)
     
-    psd = psd_.PSDImage.open('info6teams.psd')
-    image = psd.composite()
+    image = Image.open('info6teams.psd')
     img = ImageDraw.Draw(image)
     font = ImageFont.truetype(font='ARIBLK.TTF', size=48)
 
@@ -47,6 +48,7 @@ def img_6clubs_info(t_txt = ('A', 'A', 'C', 'F', 'R', 'S'), title = 'TITLE', out
     img.text((300, 300), title, font=font, fill='white', anchor='mm')
 
     image.save(f'output\\{output_name}.png', 'png')
+    image.close()
 
 
 def img_tumb(teams=('Acre', 'Silvestre'), comp='Copa', fase='8/F', desc='ida e volta', output_name='image'):
@@ -70,6 +72,29 @@ def img_tumb(teams=('Acre', 'Silvestre'), comp='Copa', fase='8/F', desc='ida e v
     img.text((960, 436), desc, font=font, fill='white', anchor='mm')
 
     image.save(f'output\\{output_name}.png', 'png')
+    image.close()
+
+
+def img_table_6(points=()):
+    
+    image = Image('tabela6.png')
+    img = ImageDraw(image)
+    font = ImageFont.truetype(font='ARIBLK.TTF', size=8)
+
+    '''
+    points é uma lista/tupla que possui em si a tupla a seguir 6 vezes (uma vez para cada time):
+        (id, jogos, vitórias, empates, saldo de gols, gols feitos)
+    id = núm. de 0 a 5 que representa a posição do times no ordem alfabética (acre = 0, silvestre = 5)
+    '''
+
+    if points == ():
+
+        points = list()
+
+        for pts in range(0, 6):
+            points.append((pts, 10, pts, 0, 0, 0))
+    
+    teams = ('acre', 'amazonense', 'cfc', 'floresta', 'rural', 'silvestre')
 
 
 if __name__ == '__main__':
