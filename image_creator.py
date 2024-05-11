@@ -75,16 +75,14 @@ def img_tumb(teams=('Acre', 'Silvestre'), comp='Copa', fase='8/F', desc='ida e v
     image.close()
 
 
-def img_table_6(points=()):
-    
-    image = Image('tabela6.png')
-    img = ImageDraw(image)
-    font = ImageFont.truetype(font='ARIBLK.TTF', size=8)
+def img_table_6(points=(), order=range(6), round=10):
 
     '''
     points é uma lista/tupla que possui em si a tupla a seguir 6 vezes (uma vez para cada time):
         (id, jogos, vitórias, empates, saldo de gols, gols feitos)
     id = núm. de 0 a 5 que representa a posição do times no ordem alfabética (acre = 0, silvestre = 5)
+
+    order é uma tupla/lista que define a ordem de exibição dos times (id de 0 a 5 para os times)
     '''
 
     if points == ():
@@ -92,9 +90,30 @@ def img_table_6(points=()):
         points = list()
 
         for pts in range(0, 6):
-            points.append((pts, 10, pts, 0, 0, 0))
+            points.append([pts, 10, pts, pts, 0, 0])
     
+    for team in points:
+        team.append(team[2]*3+team[3])
+
+    image = Image.open('tabela6.png')
+    line = 0
+    font = ImageFont.truetype('ARIBLK.TTF', 26)
     teams = ('acre', 'amazonense', 'cfc', 'floresta', 'rural', 'silvestre')
+
+    for team in order:
+        img = Image.open(f'escudos//table6//{teams[team]}.png')
+        image.paste(img, (106, 215+63*line), img)
+        col = 0
+        for crit in (1, 6, 2, 3, 4, 5):
+            img = ImageDraw.Draw(image)
+            txt = '0' + str(points[team][crit]) if points[team][crit] < 10 else str(points[team][crit])
+            img.text((184+67*col, 221+63*line), txt, fill='white', font=font)
+            col += 1
+
+            
+        line += 1
+    
+    image.save(f'output//tabela acreano {round}.png', 'png')
 
 
 if __name__ == '__main__':
