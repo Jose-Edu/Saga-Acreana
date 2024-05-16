@@ -6,10 +6,10 @@
 * Ler a aba de retrospecto e gerar todas as imagens de rebaixamento, acesso, títulos e de resultados dos times em competição x [ V ];
 * Ler a aba de retrospecto e atualizar automaticamente a aba de pontuação geral [ V ];
 * Ler a aba de retrospecto e atualizar automaticamente a tabela de retrospecto da temporada [ V ];
-* Gerador de tumbs (apenas para clássicos acreanos) [ V ];
-* Editor semi-automático de vídeos [ V ];
-* Programador de vídeos para o Youtube [  ];
-* Programador de posts para o Twitter [  ].
+* Gerador de tumbs [ V ];
+* Editor de vídeos [ V ];
+* Criador de textos para os posts [  ];
+* Aplicativo principal para gerenciar todas essas operações juntas [  ].
 
 ## Com isso pronto, a simulação da Saga Acreana se resumirá a
 
@@ -18,6 +18,5 @@
 * Registrar todos os clássicos (usando o programa) ao fim da temporada;
 * Registrar os resultados dos times na aba de retrospecto;
 * Executar o leitor e gerador de retrospecto;
-* Fazer as tumbs faltantes;
-* Programar os posts do Twitter;
-* Programar os vídeos do Youtube.
+* Criar os posts no gerador;
+* Programar os posts nas redes.
