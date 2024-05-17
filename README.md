@@ -8,7 +8,7 @@
 * Ler a aba de retrospecto e atualizar automaticamente a tabela de retrospecto da temporada [ V ];
 * Gerador de tumbs [ V ];
 * Editor de vídeos [ V ];
-* Criador de textos para os posts [  ];
+* Criador de textos para os posts [ V ];
 * Aplicativo principal para gerenciar todas essas operações juntas [  ].
 
 ## Com isso pronto, a simulação da Saga Acreana se resumirá a
