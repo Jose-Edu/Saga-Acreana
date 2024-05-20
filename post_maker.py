@@ -1,5 +1,5 @@
 from tkinter.filedialog import askopenfiles
-from os import mkdir, remove
+from os import mkdir
 from os.path import dirname
 from shutil import copy
 
@@ -73,7 +73,7 @@ def main():
     
     for file in paths:
         copy(file, path)
-    
+
 
 if __name__ == '__main__':
     main()

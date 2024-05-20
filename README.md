@@ -18,5 +18,5 @@
 * Registrar todos os clássicos (usando o programa) ao fim da temporada;
 * Registrar os resultados dos times na aba de retrospecto;
 * Executar o leitor e gerador de retrospecto;
-* Criar os posts no gerador;
+* Criar os posts restantes no gerador;
 * Programar os posts nas redes.
