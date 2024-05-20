@@ -1,29 +1,34 @@
 import moviepy.editor as editor
+from os import listdir
 
 
-def main():
-    chars = 'abcdefghijklmnopqrstuvwxyz'
+def main(): #wip
+
+    files = listdir('video')
+
+    for index, name in enumerate(files):
+        n = name[:-4]
+        files[index] = (
+            n[:3],
+            n[6:n.find(' - ', 6)].split(' x '),
+            n[n.find(' - ', 6)+3:].split(' - ')
+        )
+
     intro = editor.VideoFileClip('intro.mp4')
-    end = False
+    
+    for file in files:
 
-    for char in chars:
-        if end == False:
+        media_out = list(intro, intro)
 
-            media_out = list()
-            media_out.append(intro)
 
-            for part in (1, 2):
-                try:
-                    media_out.append(editor.VideoFileClip(f'video//{char}{part}.mp4'))
-                except:
-                    if part == 1:
-                        end = True
-            if not end:
-                media_out.append(intro)
-                media_out = editor.concatenate_videoclips(media_out)
-                media_out.write_videofile(f'output//{char}.mp4')
-        else:
-            break
+'''    intro = editor.VideoFileClip('intro.mp4')
+
+    media_out = list()
+    media_out.append(intro)
+    media_out.append(editor.VideoFileClip(f'video//{char}{part}.mp4'))
+    media_out.append(intro)
+    media_out = editor.concatenate_videoclips(media_out)
+    media_out.write_videofile(f'output//{char}.mp4')'''
 
 
 if __name__ == '__main__':

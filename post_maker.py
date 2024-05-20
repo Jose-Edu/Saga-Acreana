@@ -50,7 +50,7 @@ texts['rjg'] = 'Estatísticas da partida do dia'
 # endregion
 
 
-def main():
+def main(txt=None):
 
     global texts
 
@@ -69,7 +69,10 @@ def main():
     code = (code[0:3], code[3:])
 
     with open(path+'//text.txt', 'w') as text:
-        text.write(texts[code[0]].replace('§', code[1]))
+        if txt is None:
+            text.write(texts[code[0]].replace('§', code[1]))
+        else:
+            text.write(txt)
     
     for file in paths:
         copy(file, path)
