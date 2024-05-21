@@ -52,14 +52,14 @@ def img_6clubs_info(t_txt = ('A', 'A', 'C', 'F', 'R', 'S'), title = 'TITLE', out
     image.close()
 
 
-def img_tumb(teams=('Acre', 'Silvestre'), comp='Copa', fase='8/F', desc='ida e volta', output_name='image', path='output\\posts\\'):
+def img_tumb(teams=('Acre', 'Silvestre'), comp='Copa', fase='8/F', output_name='image', path='output\\posts\\'):
 
     psd = psd_.PSDImage.open('tumb.psd')
 
     layer_var = list(filter(lambda layer: layer.name == teams[0]+'_e', psd.descendants()))[0]
     layer_var.visible = True
 
-    if teams[1] in ('acre', 'amazonense', 'cfc', 'floresta', 'rural', 'silvestre'):
+    if teams[1] in ('Acre', 'Amazonense', 'C.F.C', 'Floresta', 'Rural', 'Silvestre'):
         layer_var = list(filter(lambda layer: layer.name == teams[1]+'_d', psd.descendants()))[0]
         layer_var.visible = True
         image = psd.composite(force=True)
@@ -85,8 +85,6 @@ def img_tumb(teams=('Acre', 'Silvestre'), comp='Copa', fase='8/F', desc='ida e v
     font = ImageFont.truetype(font='ARIBLK.TTF', size=72)
     img.text((960, 276), comp, font=font, fill='white', anchor='mm')
     img.text((960, 358), fase, font=font, fill='white', anchor='mm')
-    font = ImageFont.truetype(font='ARIBLK.TTF', size=64)
-    img.text((960, 436), desc, font=font, fill='white', anchor='mm')
 
     image.save(f'{path}{output_name}.png', 'png')
     image.close()
