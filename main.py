@@ -95,11 +95,52 @@ class App(ttk.Frame):
         post_maker.main()
 
 
-    def imgcr_club_info(self) -> None: #todo
+    def imgcr_club_info(self) -> None:
+
+        
+        def create():
+            layers = list()
+
+            for layer in self.img_ci_checkbuttons.keys():
+                if self.img_ci_checkbuttons[layer].get() == 1:
+                    layers.append(layer)
+            
+            layers.append(self.img_ci_cbox_teams.get())
+
+            texts = (self.img_ci_text1.get(), self.img_ci_text2.get())
+
+            image_creator.img_club_info(layers, texts)
+            msgbox.showinfo('SUCCESS!', 'SUCCESS INFO: Image created successfully!')
+
 
         self.tab_img_club_info = ttk.Frame(self.notebook)
         self.tab_img_club_info.pack(fill='both', expand=True)
         self.notebook.add(self.tab_img_club_info, text='Image Creator: Club Info')
+
+        self.img_ci_checkbuttons = dict()
+        self.img_ci_checkbuttons['confete'] = tk.IntVar()
+        self.img_ci_checkbuttons['taça'] = tk.IntVar()
+        self.img_ci_checkbuttons['rebaixado'] = tk.IntVar()
+        self.img_ci_checkbuttons['acesso'] = tk.IntVar()
+
+        self.img_ci_confete = ttk.Checkbutton(self.tab_img_club_info, text='confete', variable=self.img_ci_checkbuttons['confete'])
+        self.img_ci_taca = ttk.Checkbutton(self.tab_img_club_info, text='taça', variable=self.img_ci_checkbuttons['taça'])
+        self.img_ci_rebaixado = ttk.Checkbutton(self.tab_img_club_info, text='rebaixado', variable=self.img_ci_checkbuttons['rebaixado'])
+        self.img_ci_acesso = ttk.Checkbutton(self.tab_img_club_info, text='acesso', variable=self.img_ci_checkbuttons['acesso'])
+        self.img_ci_confete.pack()
+        self.img_ci_taca.pack()
+        self.img_ci_rebaixado.pack()
+        self.img_ci_acesso.pack()
+
+        self.img_ci_text1 = ttk.Entry(self.tab_img_club_info)
+        self.img_ci_text2 = ttk.Entry(self.tab_img_club_info)
+        self.img_ci_text1.pack()
+        self.img_ci_text2.pack()
+
+        self.img_ci_cbox_teams = ttk.Combobox(self.tab_img_club_info, values=('Acre', 'Amazonense', 'C.F.C', 'Floresta', 'Rural', 'Silvestre'), state='readonly')
+        self.img_ci_cbox_teams.pack()
+
+        ttk.Button(self.tab_img_club_info, text='Create', command=create).pack()
 
 
     def imgcr_all_clubs_info(self) -> None: #todo
