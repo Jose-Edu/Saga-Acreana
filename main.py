@@ -98,7 +98,7 @@ class App(ttk.Frame):
     def imgcr_club_info(self) -> None:
 
         
-        def create():
+        def create() -> None:
             layers = list()
 
             for layer in self.img_ci_checkbuttons.keys():
@@ -143,25 +143,122 @@ class App(ttk.Frame):
         ttk.Button(self.tab_img_club_info, text='Create', command=create).pack()
 
 
-    def imgcr_all_clubs_info(self) -> None: #todo
+    def imgcr_all_clubs_info(self) -> None:
         
+
+        def create() -> None:
+            teams = list()
+            
+            for team in self.img_ac_entrys_teams:
+                teams.append(self.img_ac_entrys_teams[team].get())
+            
+            image_creator.img_6clubs_info(teams, self.img_ac_entry_title.get())
+            msgbox.showinfo('SUCCESS!', 'SUCCESS INFO: Image created successfully!')
+
+
         self.tab_img_all_clubs_info = ttk.Frame(self.notebook)
         self.tab_img_all_clubs_info.pack(fill='both', expand=True)
         self.notebook.add(self.tab_img_all_clubs_info, text='Image Creator: All Clubs Info')
+        self.img_ac_entrys_teams = dict()
+
+        ttk.Label(self.tab_img_all_clubs_info, text='Acre').grid(column=0, row=0)
+        self.img_ac_entrys_teams['acre'] = ttk.Entry(self.tab_img_all_clubs_info)
+        self.img_ac_entrys_teams['acre'].grid(column=0, row=1)
+
+        ttk.Label(self.tab_img_all_clubs_info, text='Amazonense').grid(column=1, row=0)
+        self.img_ac_entrys_teams['amazonense'] = ttk.Entry(self.tab_img_all_clubs_info)
+        self.img_ac_entrys_teams['amazonense'].grid(column=1, row=1)
+
+        ttk.Label(self.tab_img_all_clubs_info, text='C.F.C').grid(column=2, row=0)
+        self.img_ac_entrys_teams['cfc'] = ttk.Entry(self.tab_img_all_clubs_info)
+        self.img_ac_entrys_teams['cfc'].grid(column=2, row=1)
+
+        ttk.Label(self.tab_img_all_clubs_info, text='Título').grid(column=0, row=2, columnspan=3, pady=10)
+        self.img_ac_entry_title = ttk.Entry(self.tab_img_all_clubs_info)
+        self.img_ac_entry_title.grid(column=0, row=3, columnspan=3, pady=10)
+
+        ttk.Label(self.tab_img_all_clubs_info, text='Floresta').grid(column=0, row=4)
+        self.img_ac_entrys_teams['floresta'] = ttk.Entry(self.tab_img_all_clubs_info)
+        self.img_ac_entrys_teams['floresta'].grid(column=0, row=5)
+
+        ttk.Label(self.tab_img_all_clubs_info, text='Rural').grid(column=1, row=4)
+        self.img_ac_entrys_teams['rural'] = ttk.Entry(self.tab_img_all_clubs_info)
+        self.img_ac_entrys_teams['rural'].grid(column=1, row=5)
+
+        ttk.Label(self.tab_img_all_clubs_info, text='Silvestre').grid(column=2, row=4)
+        self.img_ac_entrys_teams['silvestre'] = ttk.Entry(self.tab_img_all_clubs_info)
+        self.img_ac_entrys_teams['silvestre'].grid(column=2, row=5)
+
+        ttk.Button(self.tab_img_all_clubs_info, text='Create', command=create).grid(column=0, row=6, columnspan=3, pady=10)
 
 
-    def imgcr_tumb_2teams(self) -> None: #todo
+    def imgcr_tumb_2teams(self) -> None:
+
+
+        def create() -> None:
+            image_creator.img_tumb((self.img_tb_team_a.get(), self.img_tb_team_b.get()), self.img_tb_comp.get(), self.img_tb_fase.get())
+            msgbox.showinfo('SUCCESS!', 'SUCCESS INFO: Image created successfully!')
+
 
         self.tab_img_tumb_2teams = ttk.Frame(self.notebook)
         self.tab_img_tumb_2teams.pack(fill='both', expand=True)
         self.notebook.add(self.tab_img_tumb_2teams, text='Image Creator: Tumbnail 2Teams')
 
+        ttk.Label(self.tab_img_tumb_2teams, text='Competição:').pack()
+        self.img_tb_comp = ttk.Entry(self.tab_img_tumb_2teams)
+        self.img_tb_comp.pack()
 
-    def imgcr_table_6(self) -> None: #todo
+        ttk.Label(self.tab_img_tumb_2teams, text='Fase:').pack()
+        self.img_tb_fase = ttk.Entry(self.tab_img_tumb_2teams)
+        self.img_tb_fase.pack()
+
+        self.img_tb_team_a = ttk.Entry(self.tab_img_tumb_2teams)
+        self.img_tb_team_a.pack(side='left')
+
+        self.img_tb_team_b = ttk.Entry(self.tab_img_tumb_2teams)
+        self.img_tb_team_b.pack(side='right')
+
+        ttk.Button(self.tab_img_tumb_2teams, text='Create', command=create).pack(side='bottom')
+
+
+    def imgcr_table_6(self) -> None:
+
+
+        def create() -> None:
+            teams = ('acre', 'amazonense', 'cfc', 'floresta', 'rural', 'silvestre')
+            points = list()
+
+            for t_index, team in enumerate(self.img_t6_teams):
+                points.append([])
+                for c_index, crit in enumerate(team):
+                    points[t_index].append(crit.get()) if c_index == 0 else points[t_index].append(int(crit.get()))
+            
+            order = list()
+            for team in points:
+                team[0] = teams.index(team[0])
+                order.append(team[0])
+            
+            image_creator.img_table_6(points, order, points[0][1])
+            msgbox.showinfo('SUCCESS!', 'SUCCESS INFO: Image created successfully!')
+
 
         self.tab_img_table6 = ttk.Frame(self.notebook)
         self.tab_img_table6.pack(fill='both', expand=True)
         self.notebook.add(self.tab_img_table6, text='Image Creator: Table 6')
+
+        self.img_t6_teams = list()
+
+        for index, txt in enumerate(('clb', 'jgs', 'vit', 'emp', 'sg', 'gf')):
+            ttk.Label(self.tab_img_table6, text=txt).grid(row=0, column=index)
+
+        for row in range(1, 7):
+            self.img_t6_teams.append([])
+
+            for c in range(6):
+                self.img_t6_teams[row-1].append(ttk.Entry(self.tab_img_table6))
+                self.img_t6_teams[row-1][c].grid(row=row, column=c)
+        
+        ttk.Button(self.tab_img_table6, text='create', command=create).grid(column=2, row=7, columnspan=2)
 
 
 if __name__ == '__main__':
