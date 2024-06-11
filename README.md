@@ -1,6 +1,6 @@
 # Saga Acreana
 
-## To do
+## To do (COMPLETO!)
 
 * Registrador de clássicos [ V ];
 * Ler a aba de retrospecto e gerar todas as imagens de rebaixamento, acesso, títulos e de resultados dos times em competição x [ V ];
@@ -9,7 +9,7 @@
 * Gerador de tumbs [ V ];
 * Editor de vídeos [ V ];
 * Criador de textos para os posts [ V ];
-* Aplicativo principal para gerenciar todas essas operações juntas [  ].
+* Aplicativo principal para gerenciar todas essas operações juntas [ V ].
 
 ## Com isso pronto, a simulação da Saga Acreana se resumirá a
 
