@@ -1,6 +1,6 @@
 # Saga Acreana
 
-## To do (COMPLETO!)
+## To do
 
 * Registrador de clássicos [ V ];
 * Ler a aba de retrospecto e gerar todas as imagens de rebaixamento, acesso, títulos e de resultados dos times em competição x [ V ];

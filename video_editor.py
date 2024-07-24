@@ -19,7 +19,7 @@ class media():
             return None
         
         post = self.og_files[self.data[0]][:-10]
-
+        
         mkdir(f'output//videos//{post}')
         media_out = [self.intro]
         for index in self.data: media_out.append(editor.VideoFileClip(f'video//{self.og_files[index]}'))

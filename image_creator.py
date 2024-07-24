@@ -52,7 +52,7 @@ def img_6clubs_info(t_txt = ('A', 'A', 'C', 'F', 'R', 'S'), title = 'TITLE', out
     image.close()
 
 
-def img_tumb(teams=('Acre', 'Silvestre'), comp='Copa', fase='8/F', output_name='image', path='output\\posts\\'):
+def img_tumb(teams=('Acre', 'Silvestre'), comp='Copa', fase='8/F', output_name='image', path='output\\posts\\', title_size=128):
 
     psd = psd_.PSDImage.open('tumb.psd')
 
@@ -80,7 +80,7 @@ def img_tumb(teams=('Acre', 'Silvestre'), comp='Copa', fase='8/F', output_name='
 
     img = ImageDraw.Draw(image)
 
-    font = ImageFont.truetype(font='ARIBLK.TTF', size=128)
+    font = ImageFont.truetype(font='ARIBLK.TTF', size=title_size)
     img.text((960, 166), f'{teams[0]} x {teams[1]}'.upper(), font=font, fill='white', anchor='mm')
     font = ImageFont.truetype(font='ARIBLK.TTF', size=72)
     img.text((960, 276), comp, font=font, fill='white', anchor='mm')

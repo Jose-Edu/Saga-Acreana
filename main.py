@@ -196,13 +196,18 @@ class App(ttk.Frame):
 
 
         def create() -> None:
-            image_creator.img_tumb((self.img_tb_team_a.get(), self.img_tb_team_b.get()), self.img_tb_comp.get(), self.img_tb_fase.get())
+            image_creator.img_tumb((self.img_tb_team_a.get(), self.img_tb_team_b.get()), self.img_tb_comp.get(), self.img_tb_fase.get(), title_size=int(self.img_tb_titlesize.get()))
             msgbox.showinfo('SUCCESS!', 'SUCCESS INFO: Image created successfully!')
 
 
         self.tab_img_tumb_2teams = ttk.Frame(self.notebook)
         self.tab_img_tumb_2teams.pack(fill='both', expand=True)
         self.notebook.add(self.tab_img_tumb_2teams, text='Image Creator: Tumbnail 2Teams')
+
+        ttk.Label(self.tab_img_tumb_2teams, text='Tamanho do título').pack()
+        self.img_tb_titlesize = ttk.Entry(self.tab_img_tumb_2teams)
+        self.img_tb_titlesize.insert(0, '128')
+        self.img_tb_titlesize.pack()
 
         ttk.Label(self.tab_img_tumb_2teams, text='Competição:').pack()
         self.img_tb_comp = ttk.Entry(self.tab_img_tumb_2teams)
