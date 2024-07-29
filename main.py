@@ -72,6 +72,7 @@ class App(ttk.Frame):
         ttk.Button(self.tab_image_creator, text='All clubs info', command=self.imgcr_all_clubs_info).pack(pady=10)
         ttk.Button(self.tab_image_creator, text='Tumbnail 2 teams', command=self.imgcr_tumb_2teams).pack(pady=10)
         ttk.Button(self.tab_image_creator, text='Table 6', command=self.imgcr_table_6).pack(pady=10)
+        ttk.Button(self.tab_image_creator, text='Table 4', command=self.imgcr_table_4).pack(pady=10)
 
         # endregion
 
@@ -262,6 +263,43 @@ class App(ttk.Frame):
                 self.img_t6_teams[row-1][c].grid(row=row, column=c)
         
         ttk.Button(self.tab_img_table6, text='create', command=create).grid(column=2, row=7, columnspan=2)
+
+
+    def imgcr_table_4(self) -> None:
+
+        def create() -> None:
+            points = list()
+
+            for t_index, team in enumerate(self.img_t4_teams):
+                points.append([])
+                for c_index, crit in enumerate(team):
+                    points[t_index].append(crit.get()) if c_index == 0 else points[t_index].append(int(crit.get()))
+            
+            image_creator.img_table_4(self.img_t4_comp.get(), points, self.img_t4_sub.get())
+            msgbox.showinfo('SUCCESS!', 'SUCCESS INFO: Image created successfully!')
+
+        self.tab_img_table4 = ttk.Frame(self.notebook)
+        self.tab_img_table4.pack(fill='both', expand=True)
+        self.notebook.add(self.tab_img_table4, text='Image Creator: Table 4')
+
+        self.img_t4_comp = ttk.Entry(self.tab_img_table4)
+        self.img_t4_comp.grid(row=0, column=2, columnspan=2)
+        self.img_t4_sub = ttk.Entry(self.tab_img_table4)
+        self.img_t4_sub.grid(row=1, column=2, columnspan=2)
+
+        self.img_t4_teams = list()
+
+        for index, txt in enumerate(('clb', 'jgs', 'vit', 'emp', 'sg', 'gf')):
+            ttk.Label(self.tab_img_table4, text=txt).grid(row=2, column=index)
+
+        for row in range(3, 7):
+            self.img_t4_teams.append([])
+
+            for c in range(6):
+                self.img_t4_teams[row-3].append(ttk.Entry(self.tab_img_table4))
+                self.img_t4_teams[row-3][c].grid(row=row, column=c)
+        
+        ttk.Button(self.tab_img_table4, text='create', command=create).grid(column=2, row=7, columnspan=2)
 
 
 if __name__ == '__main__':

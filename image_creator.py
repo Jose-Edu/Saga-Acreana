@@ -65,7 +65,7 @@ def img_tumb(teams=('Acre', 'Silvestre'), comp='Copa', fase='8/F', output_name='
         image = psd.composite(force=True)
     else:
         image = psd.composite(force=True)
-        img = Image.open(f'escudos//outros times//{teams[1]}.png')
+        img = Image.open(f'escudos//{teams[1]}.png')
         size = sorted((img.height, img.width))[1]
         img_n = Image.new('RGBA', (size, size), (0, 0, 0, 0))
 
@@ -116,7 +116,8 @@ def img_table_6(points=(), order=range(6), round=10, path='output\\posts\\'):
     teams = ('acre', 'amazonense', 'cfc', 'floresta', 'rural', 'silvestre')
 
     for index, team in enumerate(order):
-        img = Image.open(f'escudos//table6//{teams[team]}.png')
+        img = Image.open(f'escudos//{teams[team]}.png')
+        img = img.resize((50, 50))
         image.paste(img, (106, 215+63*line), img)
         col = 0
         for crit in (1, 6, 2, 3, 4, 5):
@@ -128,6 +129,50 @@ def img_table_6(points=(), order=range(6), round=10, path='output\\posts\\'):
         line += 1
     
     image.save(f'{path}tabela acreano {round}.png', 'png')
+
+
+def img_table_4(comp, points, sub='Grupo A', path='output\\posts\\'):
+    '''
+    points é uma lista/tupla que possui em si a tupla a seguir 4 vezes (uma vez para cada time):
+        (nome, jogos, vitórias, empates, saldo de gols, gols feitos)
+    '''
+    
+    for team in points:
+        team.append(team[2]*3+team[3])
+
+    image = Image.open('tabela4.png')
+    line = 0
+    font = ImageFont.truetype('ARIBLK.TTF', 26)
+
+    for index in range(4):
+        img = Image.open(f'escudos//{points[index][0]}.png')
+
+        size = sorted((img.height, img.width))[1]
+        img_n = Image.new('RGBA', (size, size), (0, 0, 0, 0))
+        place_img = [(sorted((img.height, img.width))[1]-sorted((img.height, img.width))[0])//2, 0]
+        for i in place_img: 
+            if i < 0: i = 0
+        img_n.paste(img, place_img, img)
+        img_n = img_n.resize((50, 50))
+
+        image.paste(img_n, (106, 255+87*line), img_n)
+        img_n.close()
+        col = 0
+        for crit in (1, 6, 2, 3, 4, 5):
+            img = ImageDraw.Draw(image)
+            txt = '0' + str(points[index][crit]) if points[index][crit] < 10 else str(points[index][crit])
+            img.text((184+67*col, 260+87*line), txt, fill='white', font=font)
+            col += 1
+
+        line += 1
+    
+    font = ImageFont.truetype('ARIBLK.TTF', 58)
+    img_draw = ImageDraw.Draw(image)
+    img_draw.text((300, 40), comp, 'white', font, 'mm')
+    font = ImageFont.truetype('ARIBLK.TTF', 48)
+    img_draw.text((300, 100), sub, 'white', font, 'mm')
+
+    image.save(f'{path}{comp} {sub}.png', 'png')
 
 
 def main(season):
@@ -219,4 +264,4 @@ def main(season):
 
 
 if __name__ == '__main__':
-    main(2022)
+    main(input('Digite o ano para criar as imagens'))
