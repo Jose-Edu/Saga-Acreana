@@ -228,7 +228,6 @@ class App(ttk.Frame):
 
     def imgcr_table_6(self) -> None:
 
-
         def create() -> None:
             teams = ('acre', 'amazonense', 'cfc', 'floresta', 'rural', 'silvestre')
             points = list()
@@ -245,7 +244,6 @@ class App(ttk.Frame):
             
             image_creator.img_table_6(points, order, points[0][1])
             msgbox.showinfo('SUCCESS!', 'SUCCESS INFO: Image created successfully!')
-
 
         self.tab_img_table6 = ttk.Frame(self.notebook)
         self.tab_img_table6.pack(fill='both', expand=True)

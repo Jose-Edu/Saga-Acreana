@@ -115,13 +115,13 @@ def img_table_6(points=(), order=range(6), round=10, path='output\\posts\\'):
     font = ImageFont.truetype('ARIBLK.TTF', 26)
     teams = ('acre', 'amazonense', 'cfc', 'floresta', 'rural', 'silvestre')
 
-    for team in order:
+    for index, team in enumerate(order):
         img = Image.open(f'escudos//table6//{teams[team]}.png')
         image.paste(img, (106, 215+63*line), img)
         col = 0
         for crit in (1, 6, 2, 3, 4, 5):
             img = ImageDraw.Draw(image)
-            txt = '0' + str(points[team][crit]) if points[team][crit] < 10 else str(points[team][crit])
+            txt = '0' + str(points[index][crit]) if points[index][crit] < 10 else str(points[index][crit])
             img.text((184+67*col, 221+63*line), txt, fill='white', font=font)
             col += 1
 
