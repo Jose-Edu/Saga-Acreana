@@ -122,7 +122,7 @@ def img_table_6(points=(), order=range(6), round=10, path='output\\posts\\'):
         col = 0
         for crit in (1, 6, 2, 3, 4, 5):
             img = ImageDraw.Draw(image)
-            txt = '0' + str(points[index][crit]) if points[index][crit] < 10 else str(points[index][crit])
+            txt = '0' + str(points[index][crit]) if points[index][crit] < 10 and points[index][crit] > -1 else str(points[index][crit])
             img.text((184+67*col, 221+63*line), txt, fill='white', font=font)
             col += 1
 
@@ -145,7 +145,10 @@ def img_table_4(comp, points, sub='Grupo A', path='output\\posts\\'):
     font = ImageFont.truetype('ARIBLK.TTF', 26)
 
     for index in range(4):
-        img = Image.open(f'escudos//{points[index][0]}.png')
+        try:
+            img = Image.open(f'escudos//{points[index][0]}.png')
+        except:
+            img = Image.open(f'escudos//sem escudo.png')
 
         size = sorted((img.height, img.width))[1]
         img_n = Image.new('RGBA', (size, size), (0, 0, 0, 0))
