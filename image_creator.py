@@ -163,7 +163,7 @@ def img_table_4(comp, points, sub='Grupo A', path='output\\posts\\'):
         col = 0
         for crit in (1, 6, 2, 3, 4, 5):
             img = ImageDraw.Draw(image)
-            txt = '0' + str(points[index][crit]) if points[index][crit] < 10 else str(points[index][crit])
+            txt = '0' + str(points[index][crit]) if points[index][crit] < 10 and points[index][crit] > -1 else str(points[index][crit])
             img.text((184+67*col, 260+87*line), txt, fill='white', font=font)
             col += 1
 
